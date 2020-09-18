@@ -28,7 +28,7 @@ class Main extends Component {
           </tr>
         </thead>
         <tbody>
-          {this.state.employees.map((employee, i) => (
+          {this.state.employees.filter(employee => `${employee.name.first.toLowerCase()} ${employee.name.last.toLowerCase()}` .search(this.props.search.toLowerCase())!==-1).map((employee, i) => (
             <tr key={i}>
               <th scope="row">
                 <img src={employee.picture.thumbnail}></img>
