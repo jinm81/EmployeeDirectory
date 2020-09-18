@@ -1,34 +1,47 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import api from "../util/API";
 
 class Main extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {  };
-    }
-    render() {
-        return (
-            <table class="table">
-            <thead class="thead-dark">
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              </tbody>
-          </table>    
-        );
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      employees: [],
+    };
+  }
+  componentDidMount() {
+    api.search().then((result) => {
+      console.log(result.data.results);
+      this.setState({ employees: result.data.results }, () =>
+        console.log(this.state)
+      );
+    });
+  }
+  render() {
+    return (
+      <table className="table">
+        <thead className="thead-dark">
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          {this.state.employees.map((employee, i) => (
+            <tr key={i}>
+              <th scope="row">
+                <img src={employee.picture.thumbnail}></img>
+              </th>
+              <td>{employee.name.first}</td>
+              <td>{employee.name.last}</td>
+              <td>{employee.email}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    );
+  }
 }
 
 export default Main;
-
