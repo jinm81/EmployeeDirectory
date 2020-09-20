@@ -26,9 +26,8 @@ function Header(props) {
             type="search"
             placeholder="Search"
             aria-label="Search"
-            name = "search"
+            name="search"
             value={props.search}
-
           />
         </form>
       </div>
