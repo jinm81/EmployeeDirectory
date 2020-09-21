@@ -18,8 +18,6 @@ class Main extends Component {
     });
   }
 
-
-  
   render() {
     return (
       <table className="table">
